@@ -1,7 +1,22 @@
-# autosender-gacor
+# BMKGSatu Autosender --> https://bmkgsatu.bmkg.go.id/ 
+Script berbasis Python untuk Send GTS/Inaswitching dari data METAR dan SYNOP yang telah disubmit terlebih dahulu.
 
-## BMKGSatu Autosender ##
-Script berbasis Python untuk Send GTS/Inaswitching dari data METAR dan SYNOP yang telah disubmit.
+Otomatisasi execute scriptnya menggunakan **Task Scheduler** (Windows), atau yang lainnya sesuai dengan OS yang digunakan.
 
-Otomatisasi execute scriptnya menggunakan Task Scheduler (Windows), atau yang lainnya sesuai dengan OS yang digunakan.
-Waktu pengamatan mengambil jam sistem/komputer dan sudah otomatis ke UTC, jadi waktu trigger tidak mempengaruhi.
+Contoh waktu trigger: 
+Synoptik 03z - Waktu trigger (Task Scheduler) 12.00 WIT jika wilayah Indonesia Timur.\
+Intinya yaitu waktu trigger sesuai dengan local time dimana pengiriman data dilakukan. Scriptnya akan mengonversi ke UTC di website BMKGsatu secara otomatis.\
+\
+Untuk tutorial pengoperasian Task Scheduler dan semacamnya dapat dicari di Internet atau bertanya melalui AI.
+## Dependencies
+Script ini memerlukan beberapa module python untuk dapat menjalankannya, diantaranya:
+- Selenium
+- Webdriver_Manager
+
+### Instalasi
+`pip install selenium`\
+`pip install webdriver_manager`
+
+## Developer
+Script ini dikembangkan oleh Danu (nuep) dari Sta. Met. Kelas III Gamar Malamo - Halmahera Utara (97406). Jika ada pertanyaan lebih lanjut silahkan hubungi melalui email berikut:\
+[danu.danardi@bmkg.go.id](mailto:danu.danardi@bmkg.go.id)
