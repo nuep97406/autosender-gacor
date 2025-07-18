@@ -10,11 +10,11 @@ Intinya yaitu waktu trigger sesuai dengan local time dimana pengiriman data dila
 Untuk tutorial pengoperasian Task Scheduler dan semacamnya dapat dicari di Internet atau bertanya melalui AI.
 
 ## Requirements
-- Windows 10
+- Windows 10 or Up
 - Python 3
 
 ## Dependencies
-Script ini memerlukan beberapa module python untuk dapat menjalankannya, diantaranya:
+Script ini memerlukan beberapa module/package python untuk dapat menjalankannya, diantaranya:
 - Selenium
 - Webdriver_Manager
 
@@ -27,4 +27,4 @@ Script ini dikembangkan oleh Danu (nuep) dari Sta. Met. Kelas III Gamar Malamo -
 [danu.danardi@bmkg.go.id](mailto:danu.danardi@bmkg.go.id)
 
 ## Important Notes
-Disarankan memiliki internet yang **STABIL** dan device/computer yang **MUMPUNI**. Dikarenakan timing/kecepatan sangat mempengaruhi keberhasilan script autosender ini.
+Disarankan memiliki internet yang **STABIL** dan device/computer yang **MUMPUNI**. Dikarenakan timing/kecepatan sangat mempengaruhi **keberhasilan** script autosender ini.
