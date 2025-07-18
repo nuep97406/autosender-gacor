@@ -1,5 +1,5 @@
 # BMKGSatu Autosender --> https://bmkgsatu.bmkg.go.id/ 
-Script berbasis Python untuk Send GTS/Inaswitching dari data METAR dan SYNOP yang telah disubmit terlebih dahulu.
+Script berbasis Python untuk Send GTS/Inaswitching dari data METAR dan SYNOP yang telah disubmit pada website BMKGSatu terlebih dahulu.
 
 Otomatisasi execute scriptnya menggunakan **Task Scheduler** (Windows), atau yang lainnya sesuai dengan OS yang digunakan.
 
