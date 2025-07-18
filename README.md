@@ -5,7 +5,7 @@ Otomatisasi execute scriptnya menggunakan **Task Scheduler** (Windows), atau yan
 
 Contoh waktu trigger: 
 Synoptik 03z - Waktu trigger (Task Scheduler) 12.00 WIT jika wilayah Indonesia Timur.\
-Intinya yaitu waktu trigger sesuai dengan local time dimana pengiriman data dilakukan. Scriptnya akan mengonversi ke UTC di website BMKGsatu secara otomatis.\
+Intinya yaitu waktu trigger sesuai dengan local time dimana pengiriman data biasa dilakukan. Scriptnya akan mengonversi ke UTC pada website BMKGsatu secara otomatis.\
 \
 Untuk tutorial pengoperasian Task Scheduler dan semacamnya dapat dicari di Internet atau bertanya melalui AI.
 
