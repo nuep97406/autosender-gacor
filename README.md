@@ -8,6 +8,11 @@ Synoptik 03z - Waktu trigger (Task Scheduler) 12.00 WIT jika wilayah Indonesia T
 Intinya yaitu waktu trigger sesuai dengan local time dimana pengiriman data dilakukan. Scriptnya akan mengonversi ke UTC di website BMKGsatu secara otomatis.\
 \
 Untuk tutorial pengoperasian Task Scheduler dan semacamnya dapat dicari di Internet atau bertanya melalui AI.
+
+## Requirements
+- Windows 10
+- Python 3
+
 ## Dependencies
 Script ini memerlukan beberapa module python untuk dapat menjalankannya, diantaranya:
 - Selenium
@@ -20,3 +25,6 @@ Script ini memerlukan beberapa module python untuk dapat menjalankannya, diantar
 ## Developer
 Script ini dikembangkan oleh Danu (nuep) dari Sta. Met. Kelas III Gamar Malamo - Halmahera Utara (97406). Jika ada pertanyaan lebih lanjut silahkan hubungi melalui email berikut:\
 [danu.danardi@bmkg.go.id](mailto:danu.danardi@bmkg.go.id)
+
+## Important Notes
+Disarankan memiliki internet yang **STABIL** dan device/computer yang ***MUMPUNI**. Dikarenakan timing/kecepatan sangat mempengaruhi keberhasilan script autosender ini.
