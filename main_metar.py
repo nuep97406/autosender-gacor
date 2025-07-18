@@ -100,10 +100,11 @@ def metar():
     actions.send_keys(Keys.ENTER)
     actions.perform()
     print("Menit pengamatan dipilih")
-    time.sleep(3)
+    time.sleep(5)
 
     # Konfirmasi Data Exist
     confirm_button = wait.until(EC.element_to_be_clickable((By.XPATH, EXISTBUTTON_XPATH)))
+    time.sleep(3)
     driver.execute_script("arguments[0].click();", confirm_button)
 
     # Preview Data METAR
