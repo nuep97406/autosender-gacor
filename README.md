@@ -27,4 +27,4 @@ Script ini dikembangkan oleh Danu (nuep) dari Sta. Met. Kelas III Gamar Malamo -
 [danu.danardi@bmkg.go.id](mailto:danu.danardi@bmkg.go.id)
 
 ## Important Notes
-Disarankan memiliki internet yang **STABIL** dan device/computer yang ***MUMPUNI**. Dikarenakan timing/kecepatan sangat mempengaruhi keberhasilan script autosender ini.
+Disarankan memiliki internet yang **STABIL** dan device/computer yang **MUMPUNI**. Dikarenakan timing/kecepatan sangat mempengaruhi keberhasilan script autosender ini.
