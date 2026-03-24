@@ -34,4 +34,4 @@ SEND_M_XPATH = "/html/body/div[2]/div[1]/div[3]/div[3]/div/div/div[2]/div[2]/div
 INASWITCHING_M_XPATH = "/html/body/div[5]/div[1]/div/div/footer/button[2]"
 
 
-LOGOUT_XPATH = "/html/body/div[2]/div[1]/div[1]/ul/ul/li[11]/a/span"
+LOGOUT_XPATH = "/html/body/div[2]/div[1]/div[1]/ul/ul/li[10]/a/span"
