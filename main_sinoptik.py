@@ -23,54 +23,56 @@ xpath_jam = f"//li[text()='{jam_utc}']"
 
 # Setup opsi dan driver Chrome
 chrome_options = Options()
-chrome_options.add_argument("--headless")
+#chrome_options.add_argument("--headless")
 chrome_options.add_argument("--no-sandbox")
 chrome_options.add_argument("--disable-notifications")
 chrome_options.add_argument("--disable-infobars")
-chrome_options.add_argument("--disable-gpu")
+#chrome_options.add_argument("--disable-gpu")
 chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--disable-extensions")
 chrome_options.add_argument("--blink-settings=imagesEnabled=false")
 chrome_options.add_argument("--start-maximized")
 chrome_options.add_experimental_option("detach", True)
-chrome_options.page_load_strategy = 'eager'
+chrome_options.page_load_strategy = "eager"
+
 service = Service(ChromeDriverManager().install())
 driver = webdriver.Chrome(service=service, options=chrome_options)
 
 # Wait waktu tunggu maksimal (detik)
-wait = WebDriverWait(driver, 120)
+wait = WebDriverWait(driver, 20)
 
+overlay_blocking = (By.CSS_SELECTOR, "div.position-absolute.bg-light.rounded-sm")
+logout_locator = (By.XPATH, LOGOUT_XPATH)
 
 def login_bmkgsatu():
     """Fungsi untuk login ke website."""
     driver.get(url_login)
     # Isi Username
-    kolom_username = wait.until(EC.element_to_be_clickable((By.ID, id_username)))
+    kolom_username = wait.until(EC.presence_of_element_located((By.ID, id_username)))
     kolom_username.send_keys(input_username)
 
     # Isi Password
-    kolom_password = driver.find_element(By.ID, id_password)
+    kolom_password = wait.until(EC.presence_of_element_located((By.ID, id_password)))
     kolom_password.send_keys(input_password)
 
     # Tombol Login
-    time.sleep(2)
-    tombol_login = wait.until(EC.element_to_be_clickable((By.XPATH, LOGIN_BUTTON_XPATH)))
+    tombol_login = wait.until(EC.presence_of_element_located((By.XPATH, LOGIN_BUTTON_XPATH)))
     tombol_login.click()
+    wait.until(EC.presence_of_element_located(logout_locator))
     print("Login berhasil.")
 
 
 def sinoptik():
     """Fungsi untuk mengisi form sinoptik."""
-    logout_locator = (By.XPATH, LOGOUT_XPATH)
-    wait.until(EC.presence_of_element_located(logout_locator))
     driver.get(url_sinoptik)
     # --- Interaksi Stasiun ---
     # Dropdown daftar stasiun
+    wait.until(EC.presence_of_element_located(overlay_blocking))
+    wait.until(EC.invisibility_of_element_located(overlay_blocking))
     stasiun = wait.until(EC.element_to_be_clickable((By.ID, id_station)))
-    driver.execute_script("arguments[0].click();", stasiun)
+    stasiun.click()
 
     # Pilih Stasiun
-    time.sleep(2)
     pilih_stasiun = wait.until(EC.element_to_be_clickable((By.XPATH, STATION_XPATH)))
     pilih_stasiun.click()
     print("Stasiun dipilih.")
@@ -78,8 +80,10 @@ def sinoptik():
     # --- Interaksi Observer ---
     # Dropdown daftar observer
     time.sleep(2)
+    wait.until(EC.presence_of_element_located(overlay_blocking))
+    wait.until(EC.invisibility_of_element_located(overlay_blocking))
     observer = wait.until(EC.element_to_be_clickable((By.ID, id_observer)))
-    driver.execute_script("arguments[0].click();", observer)
+    observer.click()
 
     # Pilih observer
     pilih_observer = wait.until(EC.element_to_be_clickable((By.XPATH, OBSERVER_XPATH)))
@@ -88,11 +92,8 @@ def sinoptik():
 
     # --- Interaksi Tanggal ---
     # Buka Kalender
-    time.sleep(2)
-    overlay_locator = (By.CSS_SELECTOR, "div.position-absolute.bg-light.rounded-sm")
-    wait.until(EC.invisibility_of_element_located(overlay_locator))
     tanggal = wait.until(EC.element_to_be_clickable((By.ID, id_tanggal)))
-    driver.execute_script("arguments[0].click();", tanggal)
+    tanggal.click()
 
     # Pilih Tanggal
     hari_ini = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, css_today)))
@@ -109,12 +110,11 @@ def sinoptik():
     print("Jam pengamatan dipilih.")
 
     # Konfirmasi Data Exist
-    time.sleep(2)
-    confirm_button = wait.until(EC.element_to_be_clickable((By.XPATH, DATAEXIST_BUTTON_XPATH)))
+    confirm_button = wait.until(EC.presence_of_element_located((By.XPATH, DATAEXIST_BUTTON_XPATH)))
     confirm_button.click()
 
     # Preview Data Sinoptik
-    time.sleep(3)
+    time.sleep(5)
     preview_button = wait.until(EC.element_to_be_clickable((By.XPATH, PREVIEW_BUTTON_XPATH)))
     preview_button.click()
 
@@ -123,6 +123,7 @@ def sinoptik():
     ok_button.click()
 
     # Pengulangan preview utk fix 5////
+    time.sleep(3)
     preview_button = wait.until(EC.element_to_be_clickable((By.XPATH, PREVIEW_BUTTON_XPATH)))
     preview_button.click()
     ok_button = wait.until(EC.element_to_be_clickable((By.XPATH, OK_BUTTON_XPATH)))
@@ -137,13 +138,37 @@ def sinoptik():
     inaswtiching_button.click()
 
 # --- Alur Eksekusi Utama ---
-try:
-    time.sleep(3)
-    login_bmkgsatu()
-    sinoptik()
-    print("✅ Proses pengiriman sinoptik selesai.")
-except Exception as e:
-    print(f"❌ Terjadi error: {e}")
-finally:
-    driver.quit()
-    pass
+time.sleep(3)
+def generate_login():
+    """Mencoba login terus-menerus sampai berhasil."""
+    while True:
+        try:
+            print("🔄 Mencoba login...")
+            login_bmkgsatu()
+            print("✅ Login berhasil.")
+            break
+        except Exception as e:
+            print(f"❌ Login gagal. Error: {e}")
+            print("Mencoba lagi dalam 5 detik...")
+            time.sleep(5)
+
+def generate_sinoptik():
+    """Mengirim data Sinoptik terus-menerus sampai berhasil."""
+    while True:
+        try:
+            print("\n🔄 Memulai proses pengiriman Sinoptik...")
+            sinoptik()
+            print("✅ Proses pengiriman Sinoptik selesai.")
+            break
+        except Exception as e:
+            print(f"❌ Terjadi error saat mengirim Sinoptik: {e}")
+            print("Mencoba lagi dari awal proses Sinoptik...")
+            #  driver.refresh()
+
+# --- Alur Eksekusi Utama ---
+
+print("Memulai script auto-sender Sinoptik...")
+generate_login()
+generate_sinoptik()
+print("\n🎉 Semua tugas berhasil diselesaikan. Menutup browser.")
+driver.quit()
